@@ -34,17 +34,14 @@ if (isset($_SESSION['timestamp'])) {
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-2 d-flex align-items-center">
-                            <?php
-                            $imageData = base64_encode($activity['image1']);
-                            echo '<img src="data:image/jpeg;base64,' . $imageData . '" class="img-fluid rounded-start" alt="กิจกรรม">';
-                            ?>
+                            <!-- ใส่รูปปกตรงนี้ -->
                         </div>
                         <div class="col-md-10">
                             <div class="card-body">
                                 <h5 class="card-title">ชื่อกิจกรรม: <?= $activity['course_name'] ?></h5>
                                 <p class="card-text">ผู้สร้าง: <?= $activity['user_name'] ?></p>
                                 <p class="card-text">รายละเอียด: <?= $activity['description'] ?></p>
-                                <p class="card-text">จำกัดจำนวน: <?= $activity['max'] ?> คน</p>
+                                <p class="card-text">จำนวนผู้เข้าร่วม: <?= getNumberParticipants($activity['course_id']); ?>/<?= $activity['max_participants'] ?> คน</p>
 
                                 <?php
                                 if ($activity['status'] == 'waiting') {

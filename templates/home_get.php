@@ -31,28 +31,33 @@ if (isset($_SESSION['timestamp'])) {
                     <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-2 d-flex align-items-center">
-                                <?php
-                                // $imageData = base64_encode($activity['image1']);
-                                // echo '<img src="data:image/jpeg;base64,' . $imageData . '" class="img-fluid rounded-start" alt="กิจกรรม">';
-
-                                $query = getConnection()->query("SELECT * FROM images");
-                                    if ($query->num_rows > 0) {
-                                        while ($row = $query->fetch_assoc()) {
-                                            $imageURL = 'uploads/' . $row["file_name"];
-                                    ?>
-                                        <img src="<?php echo $imageURL ?>" class="img-fluid rounded-start" alt="กิจกรรม">
-                                    <?php }
-                                    } else { ?>
-                                        <p>No......</p>
-                                    <?php }
-                                ?>
+                            <?php
+                                $course_id = $activity['course_id'];
+                                $courseDetails = getCourseImageTitle($course_id);
+                                
+                                if ($courseDetails) {
+                                    $images = $courseDetails['images'];
+                                    
+                                    if (!empty($images)) {
+                                        echo "<div class='course-images'>";
+                                        foreach ($images as $imageURL) {
+                                            echo "<img src='$imageURL' class='img-fluid rounded-start' alt='กิจกรรม'>";
+                                        }
+                                        echo "</div>";
+                                    } else {
+                                        echo "<p>ไม่มีรูปภาพสำหรับคอร์สนี้</p>";
+                                    }
+                                } else {
+                                echo "<p>ไม่พบคอร์สที่ตรงกับ course_id นี้</p>";
+                            }?>
                             </div>
                             <div class="col-md-10">
                                 <div class="card-body">
-                                    <h5 class="card-title">ชื่อกิจกรรม: <?= $activity['course_name'] ?></h5>
+                                <h5 class="card-title">ชื่อกิจกรรม: <?= $activity['course_name'] ?></h5>
                                     <p class="card-text">ผู้สร้าง: <?= $activity['user_name'] ?></p>
                                     <p class="card-text">รายละเอียด: <?= $activity['description'] ?></p>
-                                    <p class="card-text">จำกัดจำนวน: <?= $activity['max'] ?> คน</p>
+                                    <p class="card-text">จำนวนผู้เข้าร่วม: <?= getNumberParticipants($activity['course_id']); ?>/<?= $activity['max_participants'] ?> คน</p>
+                                    <p class="card-text">วันจัดกิจกรรม: <?= $activity['start_date'] ?> ถึง <?= $activity['end_date'] ?></p>
                                     <a href="/course?id=<?= $activity['course_id'] ?>" class="btn btn-primary">รายละเอียด</a>
                                 </div>
                             </div>

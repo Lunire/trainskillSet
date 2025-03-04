@@ -46,15 +46,15 @@
                 <div class="col-12 col-md-6">
                     <div class="mb-2">
                         <label for="name" class="form-label">ชื่อกิจกรรม</label>
-                        <input type="text" id="name" name="name" class="form-control">
+                        <input type="text" id="name" name="course_name" class="form-control">
                     </div>
                     <div class="mb-2">
                         <label for="description" class="form-label">รายละเอียดกิจกรรม</label>
                         <textarea type="text" id="description" name="description" class="form-control" style="height: 100px;"></textarea>
                     </div>
                     <div class="mb-2">
-                        <label for="max" class="form-label">จำนวนคนสูงสุด</label>
-                        <input type="number" id="max" name="max" class="form-control">
+                    <label for="max_participants" class="form-label">จำนวนคนสูงสุด</label>
+                    <input type="number" id="max_participants" name="max_participants" class="form-control" required>
                     </div>
                     <div class="col-12 col-md-12">
                         <div class="d-flex flex-column flex-md-row">

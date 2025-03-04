@@ -32,16 +32,31 @@ if (isset($_SESSION['timestamp'])) {
                     <div class="row g-0">
                         <div class="col-md-2 d-flex align-items-center">
                             <?php
-                            $imageData = base64_encode($activity['image1']);
-                            echo '<img src="data:image/jpeg;base64,' . $imageData . '" class="img-fluid rounded-start" alt="กิจกรรม">';
-                            ?>
+                                $course_id = $activity['course_id'];
+                                $courseDetails = getCourseImageTitle($course_id);
+                                
+                                if ($courseDetails) {
+                                    $images = $courseDetails['images'];
+                                    
+                                    if (!empty($images)) {
+                                        echo "<div class='course-images'>";
+                                        foreach ($images as $imageURL) {
+                                            echo "<img src='$imageURL' class='img-fluid rounded-start' alt='กิจกรรม'>";
+                                        }
+                                        echo "</div>";
+                                    } else {
+                                        echo "<p>ไม่มีรูปภาพสำหรับคอร์สนี้</p>";
+                                    }
+                                } else {
+                                echo "<p>ไม่พบคอร์สที่ตรงกับ course_id นี้</p>";
+                            }?>
                         </div>
                         <div class="col-md-10">
                             <div class="card-body">
                                 <h5 class="card-title">ชื่อกิจกรรม: <?= $activity['course_name'] ?></h5>
                                 <p class="card-text">ผู้สร้าง: <?= $activity['user_name'] ?></p>
                                 <p class="card-text">รายละเอียด: <?= $activity['description'] ?></p>
-                                <p class="card-text">จำกัดจำนวน: <?= $activity['max'] ?> คน</p>
+                                <p class="card-text">จำนวนผู้เข้าร่วม: <?= getNumberParticipants($activity['course_id']); ?>/<?= $activity['max_participants'] ?> คน</p>
                                 <a href="/course_participant?id=<?= $activity['course_id'] ?>" class="btn btn-info">ดูผู้เข้าร่วม</a>
                                 <a href="/course_edit?id=<?= $activity['course_id'] ?>" class="btn btn-primary">แก้ไข</a>
                                 <a href="/course_delete?id=<?= $activity['course_id'] ?>" class="btn btn-danger" onclick="return confirmDelete()">ลบ</a>
