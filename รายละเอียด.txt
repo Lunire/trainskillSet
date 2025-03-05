@@ -5,12 +5,10 @@ update
 -templates/course_edit_get.php
 -templates/course_get.php
 -templates/history_get.php
--templates/login_get.php **ปรับให้รองรับทุกขนาดหน้าจอ แต่ 4k กับ 8k  
-ไม่ได้ทำ
+-templates/login_get.php **ปรับให้รองรับทุกขนาดหน้าจอ แต่ 4k กับ 8k ไม่ได้ทำ
 -template/register_get.php **เหมือนกับlogin แต่เพิ่มการอับโหลดรูปภาพผู้ใช้ แต่ใน sql อัพรูปโปรไฟล์ยังไม่ทำ
 
 **ส่วนที่เสร็จ**
-
 อัพรูปได้
 ดึงมาแสดงได้
 แก้ไขได้
