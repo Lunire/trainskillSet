@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrainSkill-สมัครสมาชิก</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .container {
             /* position: relative;
@@ -17,6 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding-top: 20px;
         }
         .container header {
             font-size: 1.2rem;
@@ -95,7 +92,7 @@
             padding: 20px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             max-width: 500px;
-            height: 620px;
+            height: 530px;
             width: 100%;
         }
         .profile-picture {
@@ -107,10 +104,21 @@
         }
         .form-container {
             max-width: 500px;
-            height: 620px;
+            height: 530px;
             width: 100%;
             background: white;
             padding: 30px;
+        }
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .profile-section {
+            text-align: center;
+            color: white;
+            font-size: 16px;
         }
         @media (max-width: 766px) {
             .container {
@@ -138,11 +146,11 @@
         @media (min-width: 767px) and (max-width: 769px) { 
             .profile-container {
                 width: 100%;
-                height: 620px;
+                height: 510px;
             } 
             .form-container {
                 width: 100%;
-                height: 620px;
+                height: 510px;
                 padding: 20px;
             }
             .profile-picture {
@@ -152,76 +160,84 @@
         }
     </style>
 </head>
-<body style="background: linear-gradient(to right, #cfd9df, #4364f7);">
+
+<?php
+if (isset($_SESSION['error'])) {
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'เกิดข้อผิดพลาด!',
+                text: '" . $_SESSION['error'] . "',
+                confirmButtonText: 'ตกลง',
+                customClass: { confirmButton: 'btn btn-danger' },
+                buttonsStyling: false
+            });
+        });
+    </script>";
+    unset($_SESSION['error']);
+}
+?>
+
+<body>
     <section class="container">
         <div class="profile-container d-flex justify-content-center align-items-center">
             <label for="profile_picture">
-                <img src="" class="profile-picture" id="preview">
+                <img src="<?= $data['result']['profile_image'] ?>" class="profile-picture" id="preview">
             </label>
-                
             </div>
         </div>
 
         <div class="form-container">
             <header>Registration Form</header>
-                <form class="form" action="/register" method="post" enctype="multipart/form-data">
+                <form class="form" action="/profile_edit" method="post" enctype="multipart/form-data">
                 <input class="d-none" type="file" id="profile_picture" name="profile_picture" accept="image/jpeg, image/png, image/gif" onchange="preview(event)">
                     <div class="input-box">
                         <label for="user_name">ชื่อผู้ใช้</label>
-                        <input type="text" id="user_name" name="user_name" required>
+                        <input type="text" id="user_name" name="user_name" value="<?= $data['result']['user_name'] ?>" required>
                     </div>
                     <div class="column">
                         <div class="input-box">
                             <label for="phone_number">เบอร์โทรศัพท์</label>
-                            <input type="telephone" id="phone_number" name="phone_number" required>
+                            <input type="telephone" id="phone_number" name="phone_number" value="<?= $data['result']['phone_number'] ?>" required>
                         </div>
                         <div class="input-box">
                             <label for="birthday">วันเกิด</label>
-                            <input type="date" id="birthday" name="birthday" required>
+                            <input type="date" id="birthday" name="birthday" value="<?= $data['result']['birthday'] ?>" required>
                         </div>
                     </div>
                     <div class="gender-box">
                         <label for="gender">Gender</label>
                         <div class="gender-option justify-content-center">
                             <div class="gender">
-                                <input checked="" name="gender" id="check-male" type="radio" value="ชาย">
+                                <input name="gender" id="check-male" type="radio" value="ชาย" 
+                                    <?= isset($data['result']['gender']) && $data['result']['gender'] == 'ชาย' ? 'checked' : '' ?>>
                                 <label for="check-male">ชาย</label>
                             </div>
                             <div class="gender">
-                                <input name="gender" id="check-female" type="radio" value="หญิง">
+                                <input name="gender" id="check-female" type="radio" value="หญิง" 
+                                    <?=  isset($data['result']['gender']) && $data['result']['gender'] == 'หญิง' ? 'checked' : '' ?>>
                                 <label for="check-female">หญิง</label>
                             </div>
                             <div class="gender">
-                                <input name="gender" id="check-other" type="radio" value="ไม่ระบุ">
+                                <input name="gender" id="check-other" type="radio" value="ไม่ระบุ" 
+                                    <?=  isset($data['result']['gender']) && $data['result']['gender'] == 'ไม่ระบุ' ? 'checked' : '' ?>>
                                 <label for="check-other">ไม่ระบุ</label>
                             </div>
                         </div>
                     </div>
-                    <div class="input-box">
-                        <label for="email" class="form-label">อีเมล</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                        
-                            <div class="input-box">
-                                <label for="password" class="form-label">รหัสผ่าน</label>
-                                <input type="password" id="password" name="password" class="form-control" required>
-                            </div>
-                            <div class="input-box">
-                                <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
-                                <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
-                            </div>
-                        
-                    <button type="submit" class="btn btn-primary w-100">สมัคร</button>
-                </form>
-            <p class="text-center mt-3">มีบัญชีแล้ว? <a href="/login">เข้าสู่ระบบ</a></p>
+                        <div class="input-box">
+                            <label for="password" class="form-label">รหัสผ่าน</label>
+                            <input type="password" id="password" name="password" class="form-control">
+                        </div>
+                        <div class="input-box">
+                            <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
+                            <input type="password" id="confirm_password" name="confirm_password" class="form-control">
+                        </div>
+                        <div class="mt-3">
+                    <button type="submit" class="btn btn-primary w-100">แก้ไขข้อมูล</button>
+                </div>
+            </form>
         </div>
     </section>
-
-    <?php
-        if (isset($_SESSION['message'])) {
-            echo '<div class="alert alert-info text-center mt-2">' . $_SESSION['message'] . '</div>';
-            unset($_SESSION['message']);
-        }
-        ?>
 </body>
-</html>

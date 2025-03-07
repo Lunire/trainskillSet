@@ -1,6 +1,6 @@
 <?php
 
-function getCourses(): mysqli_result|bool
+function getCourses()
 {
     $conn = getConnection();
     $sql = '
@@ -16,7 +16,7 @@ function getCourses(): mysqli_result|bool
     return $result;
 }
 
-function getCourseByName(string $course_name): mysqli_result|bool
+function getCourseByName(string $course_name)
 {
     $conn = getConnection();
     $sql = '
@@ -34,7 +34,7 @@ function getCourseByName(string $course_name): mysqli_result|bool
     return $result;
 }
 
-function getCourseById(int $course_id): mysqli_result|bool
+function getCourseById(int $course_id)
 {
     $conn = getConnection();
     $sql = '
@@ -52,7 +52,7 @@ function getCourseById(int $course_id): mysqli_result|bool
     return $result;
 }
 
-function getCourseByUserId(int $user_id): mysqli_result|bool
+function getCourseByUserId(int $user_id)
 {
     $conn = getConnection();
     $sql = '
@@ -90,7 +90,7 @@ function createCourse($courseName, $description, $maxParticipants, $startDate, $
     }
 }
 
-function editCourse(int $course_id, string $course_name, string $description, int $max, string $start_date, string $end_date, $files): bool
+function editCourse(int $course_id, string $course_name, string $description, int $max, string $start_date, string $end_date, $files)
 {
     $conn = getConnection();
 
@@ -112,21 +112,22 @@ function editCourse(int $course_id, string $course_name, string $description, in
     }
 }
 
-function deleteCourse(int $course_id): bool
-{
+function deleteCourse(int $course_id) {
     $conn = getConnection();
-    $sql = '
-        DELETE FROM courses
-        WHERE course_id = ?
-    ';
+
+    deleteImage($course_id);
+
+    $sql = "DELETE FROM courses WHERE course_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $course_id);
     $result = $stmt->execute();
 
+    $stmt->close();
+
     return $result;
 }
 
-function searchCoursesWithSingleInput(string $searchInput): mysqli_result|bool
+function searchCoursesWithSingleInput(string $searchInput)
 {
     $conn = getConnection();
 
@@ -183,4 +184,17 @@ function searchCoursesWithSingleInput(string $searchInput): mysqli_result|bool
     $result = $stmt->get_result();
 
     return $result;
+}
+
+function hasJoinedCourse($user_id, $course_id)
+{
+    // ฟังก์ชันนี้ควรตรวจสอบในฐานข้อมูลว่าผู้ใช้ได้เข้าร่วมกิจกรรมนี้แล้วหรือไม่
+    $conn = getConnection();
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM registration WHERE user_id = ? AND course_id = ?");
+    $stmt->bind_param("ii", $user_id, $course_id);
+    $stmt->execute();
+    $stmt->bind_result($count);
+    $stmt->fetch();
+    $stmt->close();
+    return $count > 0;
 }

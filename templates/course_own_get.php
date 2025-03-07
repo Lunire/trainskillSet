@@ -22,9 +22,27 @@ if (isset($_SESSION['timestamp'])) {
     }
 ?>
     <div class="container mt-4 content">
-        <?php if ($searchInput): ?>
-            <h1>ผลการค้นหา: <?= htmlspecialchars($searchInput) ?></h1>
-        <?php endif; ?>
+        <form class="d-flex mb-4">
+            <div class="searchbar">
+                <div class="searchbar-wrapper">
+                    <div class="searchbar-left">
+                        <div class="search-icon-wrapper">
+                            <span class="search-icon searchbar-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="searchbar-center">
+                        <div class="searchbar-input-spacer"></div>
+                            <input type="search" class="searchbar-input" maxlength="2048" name="q" autocapitalize="off" autocomplete="off" title="Search" role="combobox" placeholder="ชื่อกิจกรรม/วัน">
+                        </div>
+                    </div>
+                <button class="btn btn-primary" style="border-radius: 20px; width: 90px;">ค้นหา</button>
+            </div>
+        </form>
 
         <?php if (!empty($courses)): ?>
             <?php foreach ($courses as $activity): ?>
@@ -66,7 +84,7 @@ if (isset($_SESSION['timestamp'])) {
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p>ไม่พบกิจกรรมที่ตรงกับเงื่อนไข</p>
+            <p class="text-center">ไม่พบกิจกรรมที่ตรงกับเงื่อนไข</p>
         <?php endif; ?>
     </div>
 
