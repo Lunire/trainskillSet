@@ -9,7 +9,9 @@ $birthday = $_POST['birthday'];
 $gender = $_POST['gender'];
 
 if ($password === $confirm_password) {
-    if (register($user_name, $email, $password, $phone_number, $birthday, $gender)) {
+    $file = isset($_FILES['profile_picture']) ? $_FILES['profile_picture'] : null;
+
+    if (register($user_name, $email, $password, $phone_number, $birthday, $gender, $file)) {
         $_SESSION['message'] = 'Registration successful!';
         header('Location: /');
         exit;
@@ -21,4 +23,3 @@ if ($password === $confirm_password) {
 }
 
 renderView('register_get');
-unset($_SESSION['message']);

@@ -3,7 +3,7 @@ CREATE TABLE users (
     user_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    gender ENUM('ชาย', 'หญิง', 'ไม่ระบุ'),
+    gender ENUM('male', 'female', 'unknown') DEFAULT 'unknown',
     birthday DATE,
     phone_number VARCHAR(20),
     profile_image VARCHAR(255) NOT NULL  -- เก็บ path ของรูปภาพ

@@ -28,7 +28,7 @@ function logout()
     unset($_SESSION['timestamp']);
 }
 
-function register(String $user_name, String $email, String $password, String $phone_number, String $birthday, String $gender) {
+function register(String $user_name, String $email, String $password, String $phone_number, String $birthday, String $gender, $file = null) {
     $conn = getConnection();
     $check_sql = 'SELECT user_id FROM users WHERE email = ?';
     $stmt = $conn->prepare($check_sql);
@@ -40,7 +40,7 @@ function register(String $user_name, String $email, String $password, String $ph
         return false; 
     }
 
-    $profile_image = uploadProfileImage($_FILES['profile_picture']); 
+    $profile_image = ($file && !empty($file["name"])) ? uploadProfileImage($file) : 'Unknown_person.jpg';
 
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
