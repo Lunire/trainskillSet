@@ -73,3 +73,31 @@ function register(String $user_name, String $email, String $password, String $ph
     
     return $stmt->execute(); 
 }
+
+function updatePassword(String $email, String $password)
+{
+    $conn = getConnection();
+
+    $sql = 'SELECT * FROM users WHERE email = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        return false;  
+    }
+
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+    $sql = 'UPDATE users SET password = ? WHERE email = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ss', $hashed_password, $email);
+
+    if ($stmt->execute()) {
+        return true;  
+    } else {
+        return false;  
+    }
+}

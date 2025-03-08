@@ -16,10 +16,10 @@ if ($password === $confirm_password) {
         header('Location: /');
         exit;
     } else {
-        $_SESSION['message'] = 'Email is already registered. Please use a different email.';
+        $_SESSION['message'] = 'Email is already registered';
     }
 } else {
-    $_SESSION['message'] = 'Password and Confirm Password do not match';
+    $_SESSION['message'] = 'Password do not match';
 }
 
 renderView('register_get');
