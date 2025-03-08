@@ -40,7 +40,29 @@ function register(String $user_name, String $email, String $password, String $ph
         return false; 
     }
 
-    $profile_image = ($file && !empty($file["name"])) ? uploadProfileImage($file) : 'Unknown_person.jpg';
+    // ถ้ามีไฟล์อัปโหลด ให้ใช้ฟังก์ชันอัปโหลด
+    if ($file && !empty($file["name"])) {
+        $profile_image = uploadProfileImage($file);
+    } else {
+        // ถ้าไม่มีไฟล์อัปโหลด ให้ใช้ unknown_person.jpg
+        $defaultImage = "Unknown_person.jpg";
+        $defaultPath = __DIR__ . "/../public/" . $defaultImage; // ไฟล์ต้นฉบับ
+        $uploadPath = __DIR__ . "/../public/uploads/" . $defaultImage; // ปลายทาง
+
+        // ตรวจสอบว่ามีไฟล์อยู่แล้วหรือไม่
+        $newFileName = "Unknown_person.jpg"; // ตั้งค่าเริ่มต้น
+        $fileCounter = 1;
+        
+        while (file_exists(__DIR__ . "/../public/uploads/" . $newFileName)) {
+            $newFileName = "Unknown_person_" . $fileCounter . ".jpg";
+            $fileCounter++;
+        }
+
+        // คัดลอกไฟล์ไปยัง uploads/ โดยใช้ชื่อไฟล์ที่ไม่ซ้ำ
+        copy($defaultPath, __DIR__ . "/../public/uploads/" . $newFileName);
+
+        $profile_image = $newFileName;
+    }
 
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
