@@ -1,6 +1,7 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .container {
             /* position: relative;
@@ -155,6 +156,22 @@
         img.rounded-circle {
             object-fit: cover;
         }
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+        .password-container input {
+            width: 100%;
+            padding-right: 40px;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: gray;
+        }
 
         @media (max-width: 766px) {
             .container {
@@ -273,11 +290,17 @@ if (isset($_SESSION['error'])) {
                 </div>
                 <div class="input-box">
                     <label for="password" class="form-label">รหัสผ่าน</label>
-                    <input type="password" id="password" name="password" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" class="form-control">
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" class="form-control">
+                        <i class="fa fa-eye eye-icon" id="eyeIcon1"></i>
+                    </div>
                 </div>
                 <div class="input-box">
                     <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" class="form-control">
+                    <div class="password-container">
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" class="form-control">
+                        <i class="fa fa-eye eye-icon" id="eyeIcon2"></i>
+                    </div>
                 </div>
                 <div class="mt-3">
                     <button type="submit" class="btn btn-primary w-100">แก้ไขข้อมูล</button>
@@ -285,4 +308,7 @@ if (isset($_SESSION['error'])) {
             </form>
         </div>
     </section>
+
+    <script src="public/script.js"></script>
+    
 </body>

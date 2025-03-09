@@ -12,7 +12,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION['message'] = 'Password do not match';
 } elseif (updatePassword($email, $password)) {
     $_SESSION['message'] = 'Change successful!';
-    header('Location: /');
+    header('Location: /login');
     exit;
 } else {
     $_SESSION['message'] = 'Email is wrong';

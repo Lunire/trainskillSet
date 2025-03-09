@@ -81,7 +81,7 @@ if (isset($_POST['g-recaptcha-response'])) {
 
         if ($registerSuccess) {
             $_SESSION['message'] = 'สมัครสำเร็จ';
-            header('Location: /');
+            header('Location: /login');
             exit;
         } else {
             $_SESSION['message'] = 'อีเมลนี้ถูกใช้ไปแล้ว';
