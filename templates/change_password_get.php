@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrainSkill-เข้าสู่ระบบ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             background: linear-gradient(to right, #d3d3d3, #1e3c72);
@@ -34,6 +35,23 @@
             opacity: 1;
             top: 20px; /* ปรับให้ขึ้นมาจากด้านบน */
         }
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+        .password-container input {
+            width: 100%;
+            padding-right: 40px;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: gray;
+        }
+
         @media (max-width: 768px) {
             .card {
                 width: 50%;
@@ -65,17 +83,23 @@
         <form action="/change_password" method="post">
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" id="email" name="email" class="form-control" required>
+                <input type="email" id="email" name="email" class="form-control" placeholder="exemple@gmail.com" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password:</label>
-                <input type="password" id="password" name="password" class="form-control" required>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" class="form-control" required>
+                    <i class="fa fa-eye eye-icon" id="eyeIcon1"></i>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="confirm_password" class="form-label">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                <div class="password-container">
+                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                    <i class="fa fa-eye eye-icon" id="eyeIcon2"></i>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary w-100">LOGIN</button>
+            <button type="submit" class="btn btn-primary w-100">SUBMIT</button>
         </form>
             <p class="text-center mt-3">Don't have an account? <a href="/register">Sign up now</a></p>
             <a class="text-center" href="/login">Login?</a>
@@ -87,21 +111,10 @@
             <div id="popupMessage" class="popup-message text-center">
                 ❌ <?= $message; ?>
             </div>
-
-            <script>
-                // ใช้ JavaScript สำหรับแสดง popup เมื่อข้อความมีค่า
-                document.addEventListener("DOMContentLoaded", function() {
-                    var popup = document.getElementById('popupMessage');
-                    popup.classList.add('show');
-                
-                    // ซ่อน popup หลังจาก 3 วินาที
-                    setTimeout(function() {
-                        popup.classList.remove('show');
-                    }, 3000); // 3000 ms = 3 วินาที
-                });
-            </script>
     <?php endif; ?>
     </div>
+
+    <script src="public/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

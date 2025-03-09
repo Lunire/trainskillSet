@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrainSkill-สมัครสมาชิก</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .container {
             /* position: relative;
@@ -98,7 +100,7 @@
             padding: 20px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             max-width: 500px;
-            height: 620px;
+            height: 710px;
             width: 100%;
         }
         .profile-picture {
@@ -110,7 +112,7 @@
         }
         .form-container {
             max-width: 500px;
-            height: 620px;
+            height: 710px;
             width: 100%;
             background: white;
             padding: 30px;
@@ -118,7 +120,6 @@
         /* ปรับแต่งให้ popup ปรากฏขึ้นที่ด้านบน */
         .popup-message {
             position: fixed;
-            margin-top: 40px;
             top: 10px; /* ตำแหน่งจากด้านบนของหน้า */
             left: 50%;
             transform: translateX(-50%);
@@ -139,6 +140,22 @@
             display: block;
             opacity: 1;
             top: 20px; /* ปรับให้ขึ้นมาจากด้านบน */
+        }
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+        .password-container input {
+            width: 100%;
+            padding-right: 40px;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: gray;
         }
 
         @media (max-width: 766px) {
@@ -182,12 +199,12 @@
             }
             .profile-container {
                 width: 100%;
-                height: 680px;
+                height: 780px;
                 margin-bottom: 50px;
             }
             .form-container {
                 width: 100%;
-                height: 680px;
+                height: 780px;
                 padding: 20px;
                 margin-bottom: 50px;
             }
@@ -222,6 +239,7 @@
             <header>Registration Form</header>
             <form class="form" action="/register" method="post" enctype="multipart/form-data">
                 <input class="d-none" type="file" id="profile_picture" name="profile_picture" accept="image/jpeg, image/png, image/gif" onchange="preview(event)">
+                <input type="hidden" name="csrf_token" value="<?= generateCSRFToken(); ?>">
                 <div class="input-box">
                     <label for="user_name">ชื่อผู้ใช้</label>
                     <input type="text" id="user_name" name="user_name" required>
@@ -255,17 +273,25 @@
                 </div>
                 <div class="input-box">
                     <label for="email" class="form-label">อีเมล</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="exemple@gmail.com" required>
                 </div>
 
                 <div class="input-box">
                     <label for="password" class="form-label">รหัสผ่าน</label>
-                    <input type="password" id="password" name="password" class="form-control" required>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" required>
+                        <i class="fa fa-eye eye-icon" id="eyeIcon1"></i>
+                    </div>
                 </div>
                 <div class="input-box">
                     <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
-                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                    <div class="password-container">
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" required>
+                        <i class="fa fa-eye eye-icon" id="eyeIcon2"></i>
+                    </div>
                 </div>
+
+                <div class="g-recaptcha mt-3" style="display: flex; justify-content: center; align-items: center;" data-sitekey="6LeWWu4qAAAAAEIdK2SwQaN0ycthdqp5tjmiVyuL"></div>
 
                 <button type="submit" class="btn btn-primary w-100">สมัคร</button>
             </form>
@@ -281,20 +307,9 @@
         <div id="popupMessage" class="popup-message text-center">
             ❌ <?= $message; ?>
         </div>
-
-        <script>
-            // ใช้ JavaScript สำหรับแสดง popup เมื่อข้อความมีค่า
-            document.addEventListener("DOMContentLoaded", function() {
-                var popup = document.getElementById('popupMessage');
-                popup.classList.add('show');
-                
-                // ซ่อน popup หลังจาก 3 วินาที
-                setTimeout(function() {
-                    popup.classList.remove('show');
-                }, 3000); // 3000 ms = 3 วินาที
-            });
-        </script>
     <?php endif; ?>
-</body>
 
+    <script src="public/script.js"></script>
+    
+</body>
 </html>

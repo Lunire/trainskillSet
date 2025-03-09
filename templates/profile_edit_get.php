@@ -120,6 +120,41 @@
             color: white;
             font-size: 16px;
         }
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to right, rgb(100, 169, 212), rgb(99, 152, 227));
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            height: 530px;
+            width: 100%;
+            justify-content: center;
+        }
+        .profile-picture {
+            width: 160px; /* กำหนดขนาดความกว้าง */
+            height: 160px; /* กำหนดขนาดความสูง */
+            border-radius: 50%; /* ให้เป็นวงกลม */
+            border: 2px solid rgb(255, 255, 255);
+            object-fit: cover; /* ควบคุมไม่ให้รูปผิดสัดส่วน */
+        }
+        .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .profile-section {
+            text-align: center;
+            color: white;
+            font-size: 12px;
+        }
+        img.rounded-circle {
+            object-fit: cover;
+        }
 
         @media (max-width: 766px) {
             .container {
@@ -238,11 +273,11 @@ if (isset($_SESSION['error'])) {
                 </div>
                 <div class="input-box">
                     <label for="password" class="form-label">รหัสผ่าน</label>
-                    <input type="password" id="password" name="password" class="form-control">
+                    <input type="password" id="password" name="password" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" class="form-control">
                 </div>
                 <div class="input-box">
                     <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
-                    <input type="password" id="confirm_password" name="confirm_password" class="form-control">
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" class="form-control">
                 </div>
                 <div class="mt-3">
                     <button type="submit" class="btn btn-primary w-100">แก้ไขข้อมูล</button>
