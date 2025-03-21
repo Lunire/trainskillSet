@@ -157,7 +157,6 @@
             cursor: pointer;
             color: gray;
         }
-
         @media (max-width: 766px) {
             body {
                 padding-top: 40px;
@@ -192,7 +191,6 @@
                 font-size: smaller;
             }
         }
-
         @media (min-width: 767px) and (max-width: 992px) {
             body {
                 padding-top: 40px;
@@ -210,7 +208,6 @@
             }
             .profile-picture {
                 width: 120px;
-                /* ปรับขนาดรูปโปรไฟล์ให้พอดี */
                 height: 120px;
             }
             .form .column {
@@ -279,14 +276,14 @@
                 <div class="input-box">
                     <label for="password" class="form-label">รหัสผ่าน</label>
                     <div class="password-container">
-                        <input type="password" id="password" name="password" class="form-control" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" required>
+                        <input type="password" id="password" name="password" class="form-control" required>
                         <i class="fa fa-eye eye-icon" id="eyeIcon1"></i>
                     </div>
                 </div>
                 <div class="input-box">
                     <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
                     <div class="password-container">
-                        <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" required>
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
                         <i class="fa fa-eye eye-icon" id="eyeIcon2"></i>
                     </div>
                 </div>

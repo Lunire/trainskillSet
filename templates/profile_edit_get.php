@@ -251,7 +251,7 @@ if (isset($_SESSION['error'])) {
         </div>
 
         <div class="form-container">
-            <header>Registration Form</header>
+            <header>Profile Edit</header>
             <form class="form" action="/profile_edit" method="post" enctype="multipart/form-data">
                 <input class="d-none" type="file" id="profile_picture" name="profile_picture" accept="image/jpeg, image/png, image/gif" onchange="preview(event)">
                 <div class="input-box">
@@ -291,14 +291,14 @@ if (isset($_SESSION['error'])) {
                 <div class="input-box">
                     <label for="password" class="form-label">รหัสผ่าน</label>
                     <div class="password-container">
-                        <input type="password" id="password" name="password" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" class="form-control">
+                        <input type="password" id="password" name="password" class="form-control">
                         <i class="fa fa-eye eye-icon" id="eyeIcon1"></i>
                     </div>
                 </div>
                 <div class="input-box">
                     <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
                     <div class="password-container">
-                        <input type="password" id="confirm_password" name="confirm_password" placeholder="รหัสต้องมี A-Z, a-z, !@ และ 0-9" class="form-control">
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-control">
                         <i class="fa fa-eye eye-icon" id="eyeIcon2"></i>
                     </div>
                 </div>

@@ -1,5 +1,27 @@
 <head>
     <title>TrainSkill-กิจกรรมที่ขอเข้าร่วม</title>
+    <style>
+        .course-images img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-height: 150px; /* ควบคุมความสูงให้คงที่ */
+        }
+        .searchbar {
+            font-size: 14px;
+            font-family: arial, sans-serif;
+            color: #202124;
+            display: flex;
+            z-index: 3;
+            height: 44px;
+            background: white;
+            border: 1px solid #dfe1e5;
+            box-shadow: none;
+            margin: 0 auto;
+            width: auto;
+            width: 600px;
+        }
+    </style>
 </head>
 
 <?php
@@ -44,7 +66,7 @@ if (isset($_SESSION['timestamp'])) {
                                 <input type="search" class="searchbar-input" maxlength="2048" name="q" autocapitalize="off" autocomplete="off" title="Search" role="combobox" placeholder="ชื่อกิจกรรม/วัน">
                             </div>
                         </div>
-                    <button class="btn btn-primary" style="border-radius: 20px; width: 90px;">ค้นหา</button>
+                    <button class="btn btn-primary" style="width: 90px;">ค้นหา</button>
                 </div>
             </form>
 
@@ -80,6 +102,8 @@ if (isset($_SESSION['timestamp'])) {
                                 <p class="card-text">ผู้สร้าง: <?= $activity['user_name'] ?></p>
                                 <p class="card-text">รายละเอียด: <?= $activity['description'] ?></p>
                                 <p class="card-text">จำนวนผู้เข้าร่วม: <?= getNumberParticipants($activity['course_id']); ?>/<?= $activity['max_participants'] ?> คน</p>
+
+                                <a href="/course?id=<?= $activity['course_id'] ?>" class="btn btn-primary">รายละเอียด</a>
 
                                 <?php
                                 if ($activity['status'] == 'waiting') {
