@@ -59,7 +59,7 @@ if (isset($_SESSION['timestamp'])) {
 
                     <div class="searchbar-center">
                         <div class="searchbar-input-spacer"></div>
-                            <input type="search" class="searchbar-input" maxlength="2048" name="q" autocapitalize="off" autocomplete="off" title="Search" role="combobox" placeholder="ชื่อกิจกรรม/วัน">
+                            <input type="search" class="searchbar-input" maxlength="2048" name="q" autocapitalize="off" autocomplete="off" title="Search" role="combobox" placeholder="ชื่อกิจกรรม">
                         </div>
                     </div>
                 <button class="btn btn-primary" style=" width: 90px;">ค้นหา</button>

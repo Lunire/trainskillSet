@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,39 +11,51 @@
         body {
             background: linear-gradient(to right, #d3d3d3, #1e3c72);
         }
+
         /* ปรับแต่งให้ popup ปรากฏขึ้นที่ด้านบน */
         .popup-message {
             position: fixed;
             margin-top: 20px;
-            top: 10px; /* ตำแหน่งจากด้านบนของหน้า */
+            top: 10px;
+            /* ตำแหน่งจากด้านบนของหน้า */
             left: 50%;
             transform: translateX(-50%);
-            z-index: 1050; /* ให้ popup อยู่ข้างบนสุด */
+            z-index: 1050;
+            /* ให้ popup อยู่ข้างบนสุด */
             max-width: 270px;
             width: 100%;
             padding: 10px 20px;
-            background-color:rgb(220, 72, 72); /* สีพื้นหลัง (สีเขียว) */
+            background-color: rgb(220, 72, 72);
+            /* สีพื้นหลัง (สีเขียว) */
             color: white;
             border-radius: 5px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            display: none; /* ซ่อนก่อน */
-            opacity: 0; /* ซ่อนก่อน */
-            transition: opacity 0.3s ease, top 0.3s ease; /* ทำให้แสดงอย่างค่อยเป็นค่อยไป */
+            display: none;
+            /* ซ่อนก่อน */
+            opacity: 0;
+            /* ซ่อนก่อน */
+            transition: opacity 0.3s ease, top 0.3s ease;
+            /* ทำให้แสดงอย่างค่อยเป็นค่อยไป */
         }
+
         /* แสดงผลเมื่อ popup ถูกแสดง */
         .popup-message.show {
             display: block;
             opacity: 1;
-            top: 20px; /* ปรับให้ขึ้นมาจากด้านบน */
+            top: 20px;
+            /* ปรับให้ขึ้นมาจากด้านบน */
         }
+
         .password-container {
             position: relative;
             width: 100%;
         }
+
         .password-container input {
             width: 100%;
             padding-right: 40px;
         }
+
         .eye-icon {
             position: absolute;
             right: 10px;
@@ -57,6 +70,7 @@
                 width: 50%;
                 padding: 30px;
             }
+
             .popup-message {
                 margin-top: 10px;
                 max-width: 240px;
@@ -66,17 +80,18 @@
 
         @media (max-width: 992px) {
             .card {
-                width: 310px; 
+                width: 310px;
             }
         }
 
         @media (min-width: 992px) {
             .card {
-                width: 350px; 
+                width: 350px;
             }
         }
     </style>
 </head>
+
 <body class="d-flex justify-content-center align-items-center vh-100">
     <div class="card p-4 shadow-lg">
         <h3 class="text-center mb-3">RESET YOUR PASSWORD</h3>
@@ -101,20 +116,20 @@
             </div>
             <button type="submit" class="btn btn-primary w-100">SUBMIT</button>
         </form>
-            <p class="text-center mt-3">Don't have an account? <a href="/register">Sign up now</a></p>
-            <a class="text-center" href="/login">Login?</a>
+        <p class="text-center mt-3">Don't have an account? <a href="/register">Sign up now</a></p>
+        <a class="text-center" href="/login">Login?</a>
         <?php
-            if (isset($_SESSION['message'])):
-                $message = $_SESSION['message'];
-                unset($_SESSION['message']);
-            ?>
+        if (isset($_SESSION['message'])):
+            $message = $_SESSION['message'];
+            unset($_SESSION['message']);
+        ?>
             <div id="popupMessage" class="popup-message text-center">
                 ❌ <?= $message; ?>
             </div>
-    <?php endif; ?>
+        <?php endif; ?>
     </div>
 
     <script src="public/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

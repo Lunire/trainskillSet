@@ -52,7 +52,8 @@ function getTrainingByUserId(int $user_id)
         INNER JOIN registration r ON t.registration_id = r.registration_id
         INNER JOIN courses c ON r.course_id = c.course_id
         INNER JOIN users u ON c.user_id = u.user_id
-        WHERE r.user_id = ?;
+        WHERE r.user_id = ?
+        ORDER BY t.training_id DESC;
     ';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $user_id);
@@ -67,8 +68,8 @@ function createTraining(int $registrationId)
 {
     $conn = getConnection();
     $sql = '
-        INSERT INTO training (registration_id, status)
-        VALUES (?, "waiting");
+        INSERT INTO training (registration_id, status, attendance)
+        VALUES (?, "waiting", "absent");
     ';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $registrationId);
@@ -128,4 +129,57 @@ function updateAttendance($user_id, $course_id, $attendance)
     $result = $stmt->execute();
 
     return $result;
+}
+
+function generateOTP($user_id, $course_id)
+{
+    $conn = getConnection();
+    $sql = '
+        UPDATE training t
+        INNER JOIN registration r ON t.registration_id = r.registration_id
+        SET t.otp = ?
+        WHERE r.user_id = ? AND r.course_id = ?;
+    ';
+    $stmt = $conn->prepare($sql);
+    $otp = rand(100000, 999999);
+    $stmt->bind_param('iii', $otp, $user_id, $course_id);
+
+    $result = $stmt->execute();
+
+    return $result;
+}
+
+function setOTPNull($user_id, $course_id)
+{
+    $conn = getConnection();
+    $sql = '
+        UPDATE training t
+        INNER JOIN registration r ON t.registration_id = r.registration_id
+        SET t.otp = NULL
+        WHERE r.user_id = ? AND r.course_id = ?;
+    ';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ii', $user_id, $course_id);
+
+    $result = $stmt->execute();
+
+    return $result;
+}
+
+function getOTPByRegistrationId($registrationId)
+{
+    $conn = getConnection();
+    $sql = '
+        select otp
+        from training
+        where registration_id = ?;
+    ';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $registrationId);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    return $row['otp'];
 }

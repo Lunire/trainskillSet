@@ -16,6 +16,7 @@
             align-items: center;
             padding-top: 20px;
         }
+
         .container header {
             font-size: 1.2rem;
             color: #000;
@@ -23,16 +24,20 @@
             text-align: center;
             margin-top: -10px;
         }
+
         .container .form {
             margin-top: 15px;
         }
+
         .form .input-box {
             width: 100%;
             margin-top: 10px;
         }
+
         .input-box label {
             color: #000;
         }
+
         .form :where(.input-box input, .select-box) {
             position: relative;
             height: 35px;
@@ -46,34 +51,43 @@
             padding: 0 15px;
             background: rgb(255, 255, 255);
         }
+
         .input-box input:focus {
             box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
         }
+
         .form .column {
             display: flex;
             column-gap: 15px;
         }
+
         .form .gender-box {
             margin-top: 10px;
         }
+
         .form :where(.gender-option, .gender) {
             display: flex;
             align-items: center;
             column-gap: 50px;
             flex-wrap: wrap;
         }
+
         .form .gender {
             column-gap: 5px;
         }
+
         .gender input {
             accent-color: rgb(14, 29, 100)
         }
+
         .form :where(.gender input, .gender label) {
             cursor: pointer;
         }
+
         .gender label {
             color: #000;
         }
+
         .form button {
             height: 40px;
             width: 100%;
@@ -85,6 +99,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
+
         .profile-container {
             display: flex;
             flex-direction: column;
@@ -96,6 +111,7 @@
             height: 530px;
             width: 100%;
         }
+
         .profile-picture {
             width: 150px;
             height: 150px;
@@ -103,6 +119,7 @@
             border: 2px solid rgb(255, 255, 255);
             object-fit: cover;
         }
+
         .form-container {
             max-width: 500px;
             height: 530px;
@@ -110,17 +127,20 @@
             background: white;
             padding: 30px;
         }
+
         .profile-img {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
         }
+
         .profile-section {
             text-align: center;
             color: white;
             font-size: 16px;
         }
+
         .profile-container {
             display: flex;
             flex-direction: column;
@@ -133,13 +153,19 @@
             width: 100%;
             justify-content: center;
         }
+
         .profile-picture {
-            width: 160px; /* กำหนดขนาดความกว้าง */
-            height: 160px; /* กำหนดขนาดความสูง */
-            border-radius: 50%; /* ให้เป็นวงกลม */
+            width: 160px;
+            /* กำหนดขนาดความกว้าง */
+            height: 160px;
+            /* กำหนดขนาดความสูง */
+            border-radius: 50%;
+            /* ให้เป็นวงกลม */
             border: 2px solid rgb(255, 255, 255);
-            object-fit: cover; /* ควบคุมไม่ให้รูปผิดสัดส่วน */
+            object-fit: cover;
+            /* ควบคุมไม่ให้รูปผิดสัดส่วน */
         }
+
         .profile-img {
             width: 50px;
             height: 50px;
@@ -148,22 +174,27 @@
             border: 2px solid #fff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .profile-section {
             text-align: center;
             color: white;
             font-size: 12px;
         }
+
         img.rounded-circle {
             object-fit: cover;
         }
+
         .password-container {
             position: relative;
             width: 100%;
         }
+
         .password-container input {
             width: 100%;
             padding-right: 40px;
         }
+
         .eye-icon {
             position: absolute;
             right: 10px;
@@ -178,20 +209,24 @@
                 flex-direction: column;
                 /* จัดวางให้เป็นแนวตั้ง */
             }
+
             .profile-container {
                 width: 100%;
                 height: 150px;
             }
+
             .form-container {
                 width: 100%;
                 height: auto;
                 padding: 20px;
             }
+
             .profile-picture {
                 width: 120px;
                 /* ปรับขนาดรูปโปรไฟล์ให้พอดี */
                 height: 120px;
             }
+
             .form .column {
                 display: flex;
                 flex-direction: row;
@@ -204,16 +239,19 @@
                 width: 100%;
                 height: 570px;
             }
+
             .form-container {
                 width: 100%;
                 height: 570px;
                 padding: 20px;
             }
+
             .profile-picture {
                 width: 120px;
                 /* ปรับขนาดรูปโปรไฟล์ให้พอดี */
                 height: 120px;
             }
+
             .form .column {
                 display: flex;
                 flex-direction: row;
@@ -244,6 +282,7 @@ if (isset($_SESSION['error'])) {
 <body style="background-color:rgb(236, 235, 235);">
     <section class="container">
         <div class="profile-container d-flex justify-content-center align-items-center">
+            <p>ใส่รูปตรงนี้</p>
             <label for="profile_picture">
                 <img src="<?= $data['result']['profile_image'] ?>" class="profile-picture" id="preview">
             </label>
@@ -251,7 +290,7 @@ if (isset($_SESSION['error'])) {
         </div>
 
         <div class="form-container">
-            <header>Profile Edit</header>
+            <header>Registration Form</header>
             <form class="form" action="/profile_edit" method="post" enctype="multipart/form-data">
                 <input class="d-none" type="file" id="profile_picture" name="profile_picture" accept="image/jpeg, image/png, image/gif" onchange="preview(event)">
                 <div class="input-box">
@@ -291,14 +330,14 @@ if (isset($_SESSION['error'])) {
                 <div class="input-box">
                     <label for="password" class="form-label">รหัสผ่าน</label>
                     <div class="password-container">
-                        <input type="password" id="password" name="password" class="form-control">
+                        <input type="password" id="password" name="password" placeholder="รหัสผ่านใหม่" class="form-control">
                         <i class="fa fa-eye eye-icon" id="eyeIcon1"></i>
                     </div>
                 </div>
                 <div class="input-box">
                     <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
                     <div class="password-container">
-                        <input type="password" id="confirm_password" name="confirm_password" class="form-control">
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่านใหม่" class="form-control">
                         <i class="fa fa-eye eye-icon" id="eyeIcon2"></i>
                     </div>
                 </div>
@@ -310,5 +349,4 @@ if (isset($_SESSION['error'])) {
     </section>
 
     <script src="public/script.js"></script>
-    
 </body>
